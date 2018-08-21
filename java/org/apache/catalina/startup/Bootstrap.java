@@ -205,6 +205,7 @@ public final class Bootstrap {
         // Load our startup class and call its process() method
         if (log.isDebugEnabled())
             log.debug("Loading startup class");
+        //当前没有打包所以在应用类加载器中
         Class<?> startupClass =
             catalinaLoader.loadClass
             ("org.apache.catalina.startup.Catalina");
@@ -392,7 +393,7 @@ public final class Bootstrap {
     public static void main(String args[]) {
 
         if (daemon == null) {
-            // Don't set daemon until init() has completed
+            // 类加载器只是为了自身打包
             Bootstrap bootstrap = new Bootstrap();
             try {
                 bootstrap.init();

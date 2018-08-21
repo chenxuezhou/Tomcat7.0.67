@@ -55,23 +55,14 @@ import org.xml.sax.helpers.AttributesImpl;
 
 
 /**
- * <p>A <strong>Digester</strong> processes an XML input stream by matching a
- * series of element nesting patterns to execute Rules that have been added
- * prior to the start of parsing.  This package was inspired by the
- * <code>XmlMapper</code> class that was part of Tomcat 3.0 and 3.1,
- * but is organized somewhat differently.</p>
- *
- * <p>See the <a href="package-summary.html#package_description">Digester
- * Developer Guide</a> for more information.</p>
- *
- * <p><strong>IMPLEMENTATION NOTE</strong> - A single Digester instance may
- * only be used within the context of a single thread at a time, and a call
- * to <code>parse()</code> must be completed before another can be initiated
- * even from the same thread.</p>
- *
- * <p><strong>IMPLEMENTATION NOTE</strong> - A bug in Xerces 2.0.2 prevents
- * the support of XML schema. You need Xerces 2.1/2.3 and up to make
- * this class working with XML schema</p>
+ * sax中DefaultHander解析xml过程和先后顺序
+ https://blog.csdn.net/neu_yousei/article/details/22647937
+ 第一步：startElement.
+
+ 第二步 :  characters
+ 第三步 :  endElement
+
+ 第四步 :  characters
  */
 public class Digester extends DefaultHandler2 {
 
@@ -805,12 +796,7 @@ public class Digester extends DefaultHandler2 {
     }
 
 
-    /**
-     * Set the validating parser flag.  This must be called before
-     * <code>parse()</code> is called the first time.
-     *
-     * @param validating The new validating parser flag.
-     */
+    // 设置为false表示解析xml时不需要进行DTD的规则校验
     public void setValidating(boolean validating) {
 
         this.validating = validating;
@@ -828,12 +814,7 @@ public class Digester extends DefaultHandler2 {
     }
 
 
-    /**
-     * Set the rules validation flag.  This must be called before
-     * <code>parse()</code> is called the first time.
-     *
-     * @param rulesValidation The new rules validation flag.
-     */
+    // 是否进行节点设置规则校验,如果xml中相应节点没有设置解析规则会在控制台显示提示信息
     public void setRulesValidation(boolean rulesValidation) {
 
         this.rulesValidation = rulesValidation;

@@ -160,7 +160,7 @@ public final class ClassLoaderFactory {
 
         // Construct the "class path" for this class loader
         Set<URL> set = new LinkedHashSet<URL>();
-
+        //文件校验没有什么意义
         if (repositories != null) {
             for (Repository repository : repositories)  {
                 if (repository.getType() == RepositoryType.URL) {

@@ -611,6 +611,7 @@ public class Catalina {
             }
 
             try {
+                //注入catalina对象
                 inputSource.setByteStream(inputStream);
                 digester.push(this);
                 digester.parse(inputSource);
@@ -673,7 +674,7 @@ public class Catalina {
 
 
     /**
-     * Start a new server instance.
+     * 调用Server对象，start方法
      */
     public void start() {
 
