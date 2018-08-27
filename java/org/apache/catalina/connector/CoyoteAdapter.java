@@ -419,7 +419,7 @@ public class CoyoteAdapter implements Adapter {
             if (postParseSuccess) {
                 //check valves if we support async
                 request.setAsyncSupported(connector.getService().getContainer().getPipeline().isAsyncSupported());
-                // Calling the container
+                // http请求处理过程，回调容器
                 connector.getService().getContainer().getPipeline().getFirst().invoke(request, response);
 
                 if (request.isComet()) {

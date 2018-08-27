@@ -330,7 +330,7 @@ public class HostConfig
 
         // Process the event that has occurred
         if (event.getType().equals(Lifecycle.PERIODIC_EVENT)) {
-            check();
+            check();//tomcat 启动事件，就是加载web资源
         } else if (event.getType().equals(Lifecycle.START_EVENT)) {
             start();
         } else if (event.getType().equals(Lifecycle.STOP_EVENT)) {
@@ -1160,7 +1160,7 @@ public class HostConfig
                 results.add(es.submit(new DeployDirectory(this, cn, dir)));
             }
         }
-
+        //加载单个webapp下资源任务，并加入到
         for (Future<?> result : results) {
             try {
                 result.get();
@@ -1181,11 +1181,6 @@ public class HostConfig
 
         long startTime = 0;
         // Deploy the application in this directory
-        if( log.isInfoEnabled() ) {
-            startTime = System.currentTimeMillis();
-            log.info(sm.getString("hostConfig.deployDir",
-                    dir.getAbsolutePath()));
-        }
 
         Context context = null;
         File xml = new File(dir, Constants.ApplicationContextXml);
@@ -1198,6 +1193,7 @@ public class HostConfig
             if (deployXML && xml.exists()) {
                 synchronized (digesterLock) {
                     try {
+                        //StandContext
                         context = (Context) digester.parse(xml);
                     } catch (Exception e) {
                         log.error(sm.getString(
@@ -1260,6 +1256,7 @@ public class HostConfig
             context.setPath(cn.getPath());
             context.setWebappVersion(cn.getVersion());
             context.setDocBase(cn.getBaseName());
+            //加载webapp下内容，再加载ROOT
             host.addChild(context);
         } catch (Throwable t) {
             ExceptionUtils.handleThrowable(t);

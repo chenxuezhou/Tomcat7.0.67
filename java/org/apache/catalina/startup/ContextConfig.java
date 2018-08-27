@@ -1393,7 +1393,7 @@ public class ContextConfig implements LifecycleListener {
             // WEB-INF/classes/META-INF/resources configuration
         }
 
-        // Step 11. Apply the ServletContainerInitializer config to the
+        // Step 11. 初始化放置在上下文中
         // context
         if (ok) {
             for (Map.Entry<ServletContainerInitializer,
@@ -1720,7 +1720,7 @@ public class ContextConfig implements LifecycleListener {
 
         String altDDName = null;
 
-        // Open the application web.xml file, if it exists
+        // context为StandardContext对象
         ServletContext servletContext = context.getServletContext();
         try {
             if (servletContext != null) {

@@ -164,7 +164,7 @@ public abstract class ContainerBase extends LifecycleMBeanBase
 
 
     /**
-     * The child Containers belonging to this Container, keyed by name.
+     * 标准容器，然后容器调用任务
      */
     protected HashMap<String, Container> children =
         new HashMap<String, Container>();
@@ -1109,7 +1109,7 @@ public abstract class ContainerBase extends LifecycleMBeanBase
         if ((resources != null) && (resources instanceof Lifecycle))
             ((Lifecycle) resources).start();
 
-        // Start our child containers, if any
+        // 当为StandardEngine 的时候才会启动子容器，并启动去加载容器对应的资源
         Container children[] = findChildren();
         List<Future<Void>> results = new ArrayList<Future<Void>>();
         for (int i = 0; i < children.length; i++) {
@@ -1135,7 +1135,7 @@ public abstract class ContainerBase extends LifecycleMBeanBase
         if (pipeline instanceof Lifecycle)
             ((Lifecycle) pipeline).start();
 
-
+        //观察者模型，修改状态会通知观察者进行启动加载web资源
         setState(LifecycleState.STARTING);
 
         // Start our thread

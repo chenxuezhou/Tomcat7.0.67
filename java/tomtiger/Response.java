@@ -50,7 +50,10 @@ public class Response {
                 }
             }
             else {
-                Thread.sleep(1000*10);
+//                Thread.sleep(1000*10);
+                for (int i = 0; i <1000*1000*100 ; i++) {
+
+                }
                 String errorPage = "HTTP/1.1 404 File Not Found\r\n" + "Content-Type: text/html\r\n" + "Content-Length: 23\r\n" + "\r\n" + "<h1>File Not Found</h1>";
                 outputstream.write(errorPage.getBytes());
                 SimpleDateFormat dateFormat=new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
@@ -60,9 +63,7 @@ public class Response {
             outputstream.close();
         }catch(IOException e){
             e.printStackTrace();
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        } finally {
+        }  finally {
             outputstream = null;
             fileinputstream = null;
         }

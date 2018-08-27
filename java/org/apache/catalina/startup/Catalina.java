@@ -632,7 +632,7 @@ public class Catalina {
                 }
             }
         }
-
+        //这里standardEngine容器已经有一个children,[StandardEngine]
         getServer().setCatalina(this);
 
         // Stream redirection

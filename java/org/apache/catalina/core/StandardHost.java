@@ -783,11 +783,7 @@ public class StandardHost extends ContainerBase implements Host {
     }
 
     /**
-     * Start this component and implement the requirements
-     * of {@link org.apache.catalina.util.LifecycleBase#startInternal()}.
-     *
-     * @exception LifecycleException if this component detects a fatal error
-     *  that prevents this component from being used
+     启动加载所有web应用资源文件
      */
     @Override
     protected synchronized void startInternal() throws LifecycleException {
